@@ -32,4 +32,3 @@ A web-based application that performs English spelling identification and correc
 - **Fonts:** Google Fonts (DM Serif Display, DM Sans, DM Mono)
 - **No external dependencies** – Pure vanilla implementation
 
-## 📂 Project Structure
