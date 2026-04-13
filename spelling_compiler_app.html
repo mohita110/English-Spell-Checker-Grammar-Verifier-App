@@ -1,0 +1,1189 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --ink: #1a1a2e;
+    --ink2: #3d3d5c;
+    --surface: #f8f7f4;
+    --surface2: #ffffff;
+    --accent: #5B4FCC;
+    --accent2: #7B6FE8;
+    --success: #1a9e75;
+    --warn: #d97706;
+    --danger: #c0392b;
+    --border: rgba(91,79,204,0.12);
+    --border2: rgba(91,79,204,0.25);
+    --glow: rgba(91,79,204,0.08);
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --serif: 'DM Serif Display', serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--surface);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  #app {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .hero {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-top: 0.5rem;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #EEEDFE;
+    color: #534AB7;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+    border: 0.5px solid rgba(83,74,183,0.2);
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: 2.8rem;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+
+  .hero h1 em {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .hero p {
+    color: var(--ink2);
+    font-size: 1rem;
+    font-weight: 300;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .pipeline-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .pipe-step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface2);
+    border: 0.5px solid var(--border2);
+    border-radius: 8px;
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink2);
+    transition: all 0.3s ease;
+  }
+
+  .pipe-step.active {
+    background: #EEEDFE;
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .pipe-step .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.5;
+  }
+
+  .pipe-step.active .dot {
+    opacity: 1;
+    animation: pulse-dot 1.2s infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.6; }
+  }
+
+  .pipe-arrow {
+    color: var(--border2);
+    font-size: 14px;
+    padding: 0 2px;
+  }
+
+  .card {
+    background: var(--surface2);
+    border: 0.5px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .card-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+
+  .input-area {
+    position: relative;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 130px;
+    padding: 1rem 1.25rem;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  textarea:focus {
+    border-color: var(--accent);
+    background: #fafafa;
+  }
+
+  textarea::placeholder {
+    color: #aaa;
+  }
+
+  .input-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.9rem;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .char-count {
+    font-size: 12px;
+    color: #bbb;
+    font-family: var(--mono);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 20px;
+    border-radius: 8px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.18s;
+    border: none;
+    outline: none;
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 2px 12px rgba(91,79,204,0.3);
+  }
+
+  .btn-primary:hover { background: #4a3fb5; transform: translateY(-1px); box-shadow: 0 4px 18px rgba(91,79,204,0.35); }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink2);
+    border: 0.5px solid var(--border2);
+  }
+
+  .btn-ghost:hover { background: var(--surface); border-color: var(--accent); color: var(--accent); }
+
+  .btn-success {
+    background: var(--success);
+    color: white;
+  }
+  .btn-success:hover { background: #148a63; }
+
+  .upload-zone {
+    border: 1.5px dashed var(--border2);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--surface);
+  }
+
+  .upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--accent);
+    background: #EEEDFE;
+  }
+
+  .upload-icon {
+    width: 36px;
+    height: 36px;
+    margin: 0 auto 10px;
+    background: #EEEDFE;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .upload-icon svg { color: var(--accent); }
+
+  .upload-zone p {
+    font-size: 13px;
+    color: var(--ink2);
+    font-weight: 400;
+  }
+
+  .upload-zone span {
+    font-size: 11px;
+    color: #bbb;
+    display: block;
+    margin-top: 4px;
+  }
+
+  #file-input { display: none; }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 1.25rem;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 14px;
+    border: 0.5px solid var(--border);
+    text-align: center;
+  }
+
+  .stat-val {
+    font-size: 26px;
+    font-weight: 500;
+    font-family: var(--serif);
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+
+  .stat-lbl {
+    font-size: 11px;
+    color: var(--ink2);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  .c-ok { color: var(--success); }
+  .c-err { color: var(--danger); }
+  .c-warn { color: var(--warn); }
+  .c-acc { color: var(--accent); }
+
+  .token-stream {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.9;
+    margin-bottom: 1rem;
+    border: 0.5px solid var(--border);
+    min-height: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-content: flex-start;
+  }
+
+  .token {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: var(--mono);
+    border: 0.5px solid transparent;
+    transition: all 0.15s;
+    cursor: default;
+  }
+
+  .token:hover { transform: translateY(-1px); }
+
+  .tok-word { background: #f0f0fa; border-color: #d0d0f0; color: #333; }
+  .tok-misspelled { background: #fdf0f0; border-color: #f5aaaa; color: var(--danger); text-decoration: underline wavy var(--danger); }
+  .tok-punct { background: #f5f5f5; border-color: #e0e0e0; color: #888; }
+  .tok-space { background: transparent; color: #ccc; font-size: 10px; }
+  .tok-number { background: #f0f7ff; border-color: #b5d4f4; color: #185FA5; }
+  .tok-corrected { background: #e8f8f2; border-color: #9FE1CB; color: var(--success); }
+
+  .tok-badge {
+    font-size: 9px;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    opacity: 0.7;
+  }
+
+  .error-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .error-item {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    transition: border-color 0.2s;
+  }
+
+  .error-item:hover { border-color: var(--border2); }
+
+  .error-item.grammar { border-left: 2.5px solid var(--warn); }
+  .error-item.spelling { border-left: 2.5px solid var(--danger); }
+  .error-item.info { border-left: 2.5px solid var(--accent); }
+
+  .err-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 13px;
+    margin-top: 1px;
+  }
+
+  .err-icon.grammar { background: #fef3c7; color: var(--warn); }
+  .err-icon.spelling { background: #fee2e2; color: var(--danger); }
+  .err-icon.info { background: #EEEDFE; color: var(--accent); }
+
+  .err-body { flex: 1; }
+
+  .err-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .err-word {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .err-type {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  .err-type.spelling { background: #fee2e2; color: var(--danger); }
+  .err-type.grammar { background: #fef3c7; color: var(--warn); }
+  .err-type.info { background: #EEEDFE; color: var(--accent); }
+
+  .err-desc {
+    font-size: 12px;
+    color: var(--ink2);
+    margin-bottom: 7px;
+    line-height: 1.5;
+  }
+
+  .suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .sug-btn {
+    background: white;
+    border: 0.5px solid var(--border2);
+    border-radius: 6px;
+    padding: 4px 11px;
+    font-size: 12px;
+    font-family: var(--mono);
+    color: var(--success);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: 500;
+  }
+
+  .sug-btn:hover {
+    background: var(--success);
+    color: white;
+    border-color: var(--success);
+    transform: translateY(-1px);
+  }
+
+  .corrected-output {
+    background: #f0fff8;
+    border: 0.5px solid #9FE1CB;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink);
+    min-height: 60px;
+  }
+
+  .corrected-output .highlight {
+    background: #d4f5e8;
+    border-radius: 3px;
+    padding: 0 3px;
+    color: var(--success);
+    font-weight: 500;
+    border-bottom: 2px solid var(--success);
+  }
+
+  .ast-tree {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    line-height: 2;
+  }
+
+  .ast-node { color: var(--accent); font-weight: 500; }
+  .ast-leaf { color: var(--success); }
+  .ast-err { color: var(--danger); }
+  .ast-ind { color: #ccc; }
+
+  .phase-log {
+    background: #1a1a2e;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.9;
+    color: #9090b0;
+    max-height: 180px;
+    overflow-y: auto;
+  }
+
+  .log-ok { color: #5DCAA5; }
+  .log-err { color: #F09595; }
+  .log-warn { color: #FAC775; }
+  .log-info { color: #85B7EB; }
+  .log-dim { color: #555580; }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+
+  .empty-state svg {
+    margin: 0 auto 1rem;
+    display: block;
+    opacity: 0.25;
+  }
+
+  .empty-state p {
+    color: #bbb;
+    font-size: 14px;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 1rem;
+    border-bottom: 0.5px solid var(--border);
+    padding-bottom: 0;
+  }
+
+  .tab {
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -0.5px;
+    transition: all 0.15s;
+    border-radius: 6px 6px 0 0;
+  }
+
+  .tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    background: #EEEDFE22;
+  }
+
+  .tab:hover:not(.active) { color: var(--accent); background: var(--glow); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .loading-bar {
+    width: 100%;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    display: none;
+  }
+
+  .loading-bar.show { display: block; }
+
+  .loading-bar-inner {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    width: 0%;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  .divider {
+    height: 0.5px;
+    background: var(--border);
+    margin: 1rem 0;
+  }
+
+  .footer-note {
+    text-align: center;
+    font-size: 11px;
+    color: #ccc;
+    margin-top: 2rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 600px) {
+    .results-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero h1 { font-size: 2rem; }
+    .pipeline-strip { justify-content: flex-start; }
+  }
+</style>
+
+<div id="app">
+  <h2 class="sr-only" style="position:absolute;left:-9999px">Spelling and grammar correction tool using compiler-based lexical analysis</h2>
+
+  <div class="hero">
+    <div class="hero-badge">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="4"/></svg>
+      Compiler-Powered Analysis
+    </div>
+    <h1>English Spell <em>Checker</em><br>& Grammar Verifier</h1>
+    <p>Lexical analysis · Tokenization · Parse tree · Spelling validation</p>
+  </div>
+
+  <div class="pipeline-strip" id="pipeline">
+    <div class="pipe-step" id="step-input"><span class="dot"></span>Input</div>
+    <div class="pipe-arrow">›</div>
+    <div class="pipe-step" id="step-lex"><span class="dot"></span>Lexer</div>
+    <div class="pipe-arrow">›</div>
+    <div class="pipe-step" id="step-parse"><span class="dot"></span>Parser</div>
+    <div class="pipe-arrow">›</div>
+    <div class="pipe-step" id="step-spell"><span class="dot"></span>Spell Check</div>
+    <div class="pipe-arrow">›</div>
+    <div class="pipe-step" id="step-grammar"><span class="dot"></span>Grammar</div>
+    <div class="pipe-arrow">›</div>
+    <div class="pipe-step" id="step-out"><span class="dot"></span>Output</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Input Text</div>
+    <div class="input-area">
+      <textarea id="main-input" placeholder="Type or paste your text here… e.g. 'The quikc brwon fox jumpd ovr the lasy dog.'" spellcheck="false"></textarea>
+    </div>
+    <div class="input-controls">
+      <span class="char-count" id="char-count">0 characters · 0 words</span>
+      <div class="btn-row">
+        <button class="btn btn-ghost" onclick="loadSample()">Load sample</button>
+        <button class="btn btn-ghost" onclick="clearAll()">Clear</button>
+        <button class="btn btn-primary" onclick="analyze()">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 1h4l4 4v8H1V1z"/><path d="M5 1v4H1"/><path d="M4 7h6M4 9.5h4"/></svg>
+          Analyze
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">File Upload</div>
+    <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()">
+      <div class="upload-icon">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12V4M6 7l3-3 3 3"/><rect x="2" y="13" width="14" height="3" rx="1.5"/></svg>
+      </div>
+      <p>Drop a .txt or .md file, or click to browse</p>
+      <span>Supported: .txt, .md — max 50 KB</span>
+    </div>
+    <input type="file" id="file-input" accept=".txt,.md" onchange="handleFile(event)">
+  </div>
+
+  <div class="loading-bar" id="loading-bar">
+    <div class="loading-bar-inner" id="loading-inner"></div>
+  </div>
+
+  <div id="results-section" style="display:none">
+
+    <div class="results-grid" id="stats-grid"></div>
+
+    <div class="card">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('tokens')">Token Stream</div>
+        <div class="tab" onclick="switchTab('errors')">Errors &amp; Suggestions</div>
+        <div class="tab" onclick="switchTab('corrected')">Corrected Text</div>
+        <div class="tab" onclick="switchTab('ast')">Parse Tree</div>
+        <div class="tab" onclick="switchTab('log')">Compiler Log</div>
+      </div>
+
+      <div class="tab-panel active" id="tab-tokens">
+        <div class="token-stream" id="token-display"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-errors">
+        <div class="error-list" id="error-list"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-corrected">
+        <div class="corrected-output" id="corrected-display"></div>
+        <div style="margin-top:10px; display:flex; gap:8px; justify-content:flex-end">
+          <button class="btn btn-ghost" onclick="copyText()">Copy corrected text</button>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-ast">
+        <div class="ast-tree" id="ast-display"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-log">
+        <div class="phase-log" id="phase-log"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="empty-placeholder" class="empty-state">
+    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" stroke="#999" stroke-width="1.5">
+      <rect x="10" y="8" width="40" height="44" rx="5"/>
+      <path d="M18 20h24M18 28h24M18 36h14"/>
+    </svg>
+    <p>Enter text above and click Analyze to run the compiler pipeline</p>
+  </div>
+</div>
+
+<div class="footer-note">
+  Compiler phases: Lexical Analysis → Tokenization → Recursive Descent Parser → Spell Validation → Grammar Rules
+</div>
+
+<script>
+const DICTIONARY = new Set([
+  "a","about","above","across","after","again","against","all","almost","along",
+  "already","also","although","always","am","among","an","and","another","any",
+  "anything","are","around","as","at","away","back","be","because","been","before",
+  "being","below","best","better","between","big","both","but","by","called","came",
+  "can","cannot","come","could","day","did","different","do","does","done","down",
+  "during","each","even","ever","every","example","few","find","first","for","form",
+  "found","from","get","give","go","good","got","great","had","has","have","he",
+  "help","her","here","him","his","home","how","however","i","if","important","in",
+  "into","is","it","its","just","keep","know","large","last","later","learn","left",
+  "let","like","little","long","look","made","make","man","many","may","me","mean",
+  "men","might","more","most","much","my","need","never","new","next","no","not",
+  "now","of","off","often","old","on","once","only","or","other","our","out","over",
+  "own","part","people","play","point","put","quite","rather","right","said","same",
+  "say","see","set","she","should","show","small","so","some","something","sometimes",
+  "soon","still","such","take","tell","than","that","the","their","them","then",
+  "there","these","they","thing","think","this","those","through","time","to","too",
+  "turn","two","under","until","up","us","use","used","very","was","way","we","well",
+  "went","were","what","when","where","which","while","who","why","will","with","work",
+  "world","would","write","year","yet","you","your","us","name","each","place","three",
+  "number","line","end","hand","high","most","between","come","come","plant","country",
+  "school","start","city","earth","eyes","light","head","under","story","saw","left",
+  "don't","it's","i'm","we're","they're","can't","won't","didn't","doesn't","isn't",
+  "aren't","wasn't","weren't","couldn't","wouldn't","shouldn't","i've","i'll","i'd",
+  "we've","we'll","we'd","you've","you'll","you'd","they've","they'll","they'd",
+  "he's","she's","that's","who's","there's","here's","let's","what's","where's",
+  "fox","quick","brown","lazy","dog","jumps","over","jumped","runs","run","runs",
+  "old","new","big","small","tall","short","fast","slow","happy","sad","good","bad",
+  "hello","world","test","sample","text","input","output","type","write","read",
+  "computer","language","program","code","spell","check","grammar","correct","error",
+  "the","its","your","its","our","their","his","her","my","your","our",
+  "sentence","word","paragraph","document","file","letter","character","space",
+  "period","comma","question","answer","subject","verb","noun","adjective","adverb",
+  "they","we","us","him","me","them","it","he","she","who","whom","what","which",
+  "morning","evening","night","day","week","month","year","today","tomorrow","yesterday",
+  "many","some","all","both","few","more","most","other","same","such","no","only",
+  "own","same","so","than","too","very","just","because","as","at","be","have","do",
+  "say","get","make","go","know","take","see","come","think","look","want","give",
+  "use","find","tell","ask","seem","feel","try","leave","call","keep","let","begin",
+  "show","hear","play","run","move","live","believe","hold","bring","happen","must",
+  "man","woman","child","boy","girl","person","people","thing","place","time","way",
+  "water","food","book","house","family","friend","money","love","life","hand",
+  "part","place","case","week","company","system","program","question","work",
+  "government","number","night","point","home","play","small","number","off",
+  "always","move","try","kind","hand","picture","again","change","off","play",
+  "spell","checker","english","words","input","analyze","analyze","correction",
+  "corrections","suggestion","suggestions","misspelled","misspelling","lexical",
+  "analysis","token","tokens","parse","parser","grammar","syntax","compiler","ast"
+]);
+
+const COMMON_TYPOS = {
+  "teh":"the","taht":"that","thier":"their","recieve":"receive","occured":"occurred",
+  "seperate":"separate","definately":"definitely","accomodate":"accommodate",
+  "occurance":"occurrence","existance":"existence","persistance":"persistence",
+  "independant":"independent","judgement":"judgment","priviledge":"privilege",
+  "reccomend":"recommend","relevent":"relevant","apparant":"apparent",
+  "acheive":"achieve","beleive":"believe","concieve":"conceive","foriegn":"foreign",
+  "freind":"friend","goverment":"government","grammer":"grammar","hieght":"height",
+  "imediately":"immediately","instrucions":"instructions","intresting":"interesting",
+  "knowledgable":"knowledgeable","maintainance":"maintenance","mispell":"misspell",
+  "neccessary":"necessary","noticable":"noticeable","ocasionally":"occasionally",
+  "oppertunity":"opportunity","paralell":"parallel","possesion":"possession",
+  "probaly":"probably","prominant":"prominent","questionaire":"questionnaire",
+  "responsability":"responsibility","rythm":"rhythm","sentance":"sentence",
+  "truely":"truly","untill":"until","wierd":"weird","writting":"writing",
+  "quikc":"quick","brwon":"brown","jumpd":"jumped","lasy":"lazy","ovr":"over",
+  "speling":"spelling","grammer":"grammar","corect":"correct","becuase":"because",
+  "woud":"would","coud":"could","shold":"should","ther":"there","wher":"where",
+  "whay":"what","thnk":"think","poeple":"people","langauge":"language",
+  "compter":"computer","erorr":"error","waht":"what","hte":"the","nad":"and",
+  "adn":"and","hav":"have","dont":"don't","cant":"can't","wont":"won't","isnt":"isn't"
+};
+
+const GRAMMAR_RULES = [
+  { pattern: /\ba\s+[aeiou]/gi, msg: "Use 'an' before vowel sounds", type: "grammar", fix: s => s.replace(/\ba\s+([aeiou])/gi, 'an $1') },
+  { pattern: /\bi\s/g, msg: "Capitalize 'I'", type: "grammar", fix: s => s.replace(/\bi\s/g, 'I ') },
+  { pattern: /\s{2,}/g, msg: "Extra whitespace detected", type: "info", fix: s => s.replace(/\s{2,}/g, ' ') },
+  { pattern: /[a-z]\s*\.\s*[a-z]/g, msg: "Sentence may need capitalization after period", type: "grammar", fix: null },
+  { pattern: /\b(is|are|was|were)\s+\w+ing\b/gi, msg: "Progressive tense detected — verify usage", type: "info", fix: null },
+  { pattern: /\b(very|really|extremely)\s+(very|really|extremely)\b/gi, msg: "Redundant intensifier", type: "grammar", fix: null },
+];
+
+const TOKEN_TYPES = { WORD:'WORD', PUNCT:'PUNCT', SPACE:'SPACE', NUMBER:'NUMBER', NEWLINE:'NEWLINE' };
+
+function tokenize(text) {
+  const tokens = [];
+  let i = 0;
+  while (i < text.length) {
+    const ch = text[i];
+    if (/\d/.test(ch)) {
+      let num = '';
+      while (i < text.length && /[\d.,]/.test(text[i])) num += text[i++];
+      tokens.push({ type: TOKEN_TYPES.NUMBER, val: num });
+    } else if (/[a-zA-Z']/.test(ch)) {
+      let word = '';
+      while (i < text.length && /[a-zA-Z']/.test(text[i])) word += text[i++];
+      tokens.push({ type: TOKEN_TYPES.WORD, val: word });
+    } else if (ch === '\n') {
+      tokens.push({ type: TOKEN_TYPES.NEWLINE, val: '\n' });
+      i++;
+    } else if (/\s/.test(ch)) {
+      let sp = '';
+      while (i < text.length && /\s/.test(text[i]) && text[i] !== '\n') sp += text[i++];
+      tokens.push({ type: TOKEN_TYPES.SPACE, val: sp });
+    } else {
+      tokens.push({ type: TOKEN_TYPES.PUNCT, val: ch });
+      i++;
+    }
+  }
+  return tokens;
+}
+
+function spellCheck(word) {
+  const low = word.toLowerCase();
+  if (DICTIONARY.has(low)) return { ok: true };
+  if (COMMON_TYPOS[low]) return { ok: false, suggestions: [COMMON_TYPOS[low]], typo: true };
+  const suggestions = editDistance(low);
+  return { ok: false, suggestions };
+}
+
+function editDistance(word) {
+  const results = [];
+  for (const dictWord of DICTIONARY) {
+    if (Math.abs(dictWord.length - word.length) > 3) continue;
+    const d = levenshtein(word, dictWord);
+    if (d <= 2) results.push({ word: dictWord, d });
+  }
+  results.sort((a,b) => a.d - b.d);
+  return results.slice(0,4).map(r => r.word);
+}
+
+function levenshtein(a, b) {
+  const m = a.length, n = b.length;
+  const dp = Array.from({length:m+1}, (_,i) => Array.from({length:n+1}, (_,j) => i===0?j:j===0?i:0));
+  for (let i=1;i<=m;i++) for (let j=1;j<=n;j++)
+    dp[i][j] = a[i-1]===b[j-1] ? dp[i-1][j-1] : 1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
+  return dp[m][n];
+}
+
+function parseToAST(tokens) {
+  const sentences = [];
+  let current = [];
+  for (const tok of tokens) {
+    if (tok.type === TOKEN_TYPES.NEWLINE || (tok.type === TOKEN_TYPES.PUNCT && '.!?'.includes(tok.val))) {
+      if (current.length > 0) {
+        sentences.push({ type:'SENTENCE', children: current, end: tok.val });
+        current = [];
+      }
+    } else if (tok.type !== TOKEN_TYPES.SPACE) {
+      current.push(tok);
+    }
+  }
+  if (current.length > 0) sentences.push({ type:'SENTENCE', children: current, end:'' });
+  return { type:'DOCUMENT', children: sentences };
+}
+
+function renderAST(node, depth=0) {
+  const indent = '  '.repeat(depth);
+  if (node.type === 'DOCUMENT') {
+    let out = `<span class="ast-node">DOCUMENT</span>\n`;
+    node.children.forEach((child, i) => {
+      out += indent + '├─ ' + renderAST(child, depth+1);
+    });
+    return out;
+  }
+  if (node.type === 'SENTENCE') {
+    const wordCount = node.children.filter(c=>c.type===TOKEN_TYPES.WORD).length;
+    let out = `<span class="ast-node">SENTENCE</span> <span class="ast-ind">[${wordCount} words]</span>\n`;
+    node.children.slice(0,6).forEach((tok, i) => {
+      const isLast = i === Math.min(node.children.length, 6) - 1;
+      const pre = indent + (isLast ? '└─ ' : '├─ ');
+      const cls = tok.type===TOKEN_TYPES.WORD ? 'ast-leaf' : 'ast-ind';
+      out += pre + `<span class="${cls}">${tok.type}("${escHtml(tok.val)}")</span>\n`;
+    });
+    if (node.children.length > 6) out += indent + `└─ <span class="ast-ind">… ${node.children.length-6} more tokens</span>\n`;
+    return out;
+  }
+  return `<span class="ast-ind">${node.type}</span>\n`;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+let analysisResult = null;
+let currentText = '';
+
+function analyze() {
+  const text = document.getElementById('main-input').value.trim();
+  if (!text) return;
+  currentText = text;
+  runPipeline(text);
+}
+
+function runPipeline(text) {
+  const steps = ['step-input','step-lex','step-parse','step-spell','step-grammar','step-out'];
+  steps.forEach(s => { document.getElementById(s).classList.remove('active'); });
+
+  const bar = document.getElementById('loading-bar');
+  const inner = document.getElementById('loading-inner');
+  bar.classList.add('show');
+  inner.style.width = '0%';
+  document.getElementById('results-section').style.display = 'none';
+  document.getElementById('empty-placeholder').style.display = 'none';
+
+  let phase = 0;
+  const logs = [];
+
+  const advance = () => {
+    if (phase > 0) document.getElementById(steps[phase-1]).classList.remove('active');
+    if (phase < steps.length) document.getElementById(steps[phase]).classList.add('active');
+    inner.style.width = ((phase+1)/steps.length*100) + '%';
+    phase++;
+  };
+
+  advance();
+  logs.push(`<span class="log-info">[INIT]</span> <span class="log-dim">Starting compiler pipeline...</span>`);
+  logs.push(`<span class="log-dim">[INIT]</span> Input length: ${text.length} chars`);
+
+  setTimeout(() => {
+    advance();
+    const tokens = tokenize(text);
+    logs.push(`<span class="log-ok">[LEX]</span>  Tokenized → ${tokens.length} tokens produced`);
+    logs.push(`<span class="log-dim">[LEX]</span>  WORD: ${tokens.filter(t=>t.type==='WORD').length} · PUNCT: ${tokens.filter(t=>t.type==='PUNCT').length} · NUMBER: ${tokens.filter(t=>t.type==='NUMBER').length}`);
+
+    setTimeout(() => {
+      advance();
+      const ast = parseToAST(tokens);
+      const sentCount = ast.children.length;
+      logs.push(`<span class="log-ok">[PARSE]</span> AST constructed — ${sentCount} sentence node(s)`);
+      logs.push(`<span class="log-dim">[PARSE]</span> Recursive descent complete`);
+
+      setTimeout(() => {
+        advance();
+        const wordTokens = tokens.filter(t => t.type === TOKEN_TYPES.WORD);
+        const spellErrors = [];
+        const checkedWords = new Set();
+
+        wordTokens.forEach(tok => {
+          const low = tok.val.toLowerCase();
+          if (low.length <= 1 || checkedWords.has(low)) return;
+          checkedWords.add(low);
+          const res = spellCheck(tok.val);
+          if (!res.ok) {
+            spellErrors.push({ word: tok.val, suggestions: res.suggestions || [], typo: res.typo });
+          }
+        });
+
+        logs.push(`<span class="log-ok">[SPELL]</span> Checked ${wordTokens.length} word tokens`);
+        logs.push(spellErrors.length === 0
+          ? `<span class="log-ok">[SPELL]</span> No spelling errors found`
+          : `<span class="log-err">[SPELL]</span> ${spellErrors.length} spelling error(s) detected`);
+
+        setTimeout(() => {
+          advance();
+          const grammarErrors = [];
+          GRAMMAR_RULES.forEach(rule => {
+            const matches = text.match(rule.pattern);
+            if (matches) {
+              grammarErrors.push({ msg: rule.msg, match: matches[0], type: rule.type, fix: rule.fix, pattern: rule.pattern });
+            }
+          });
+          logs.push(`<span class="log-ok">[GRAM]</span> Grammar rules applied: ${GRAMMAR_RULES.length} rules`);
+          logs.push(grammarErrors.length === 0
+            ? `<span class="log-ok">[GRAM]</span> No grammar issues found`
+            : `<span class="log-warn">[GRAM]</span> ${grammarErrors.length} grammar hint(s)`);
+
+          setTimeout(() => {
+            advance();
+            logs.push(`<span class="log-ok">[OUT]</span>  Output stage complete`);
+            logs.push(`<span class="log-dim">[OUT]</span>  Rendering results...`);
+            bar.classList.remove('show');
+
+            analysisResult = { tokens, ast, spellErrors, grammarErrors, text };
+            renderResults(analysisResult, logs);
+          }, 250);
+        }, 300);
+      }, 350);
+    }, 300);
+  }, 200);
+}
+
+function renderResults(res, logs) {
+  const { tokens, ast, spellErrors, grammarErrors, text } = res;
+  const totalWords = tokens.filter(t=>t.type===TOKEN_TYPES.WORD).length;
+  const totalSentences = ast.children.length;
+  const totalErrors = spellErrors.length + grammarErrors.filter(g=>g.type==='grammar').length;
+  const accuracy = totalWords > 0 ? Math.round(((totalWords - spellErrors.length) / totalWords) * 100) : 100;
+
+  document.getElementById('stats-grid').innerHTML = `
+    <div class="stat-card"><div class="stat-val c-acc">${totalWords}</div><div class="stat-lbl">Words</div></div>
+    <div class="stat-card"><div class="stat-val c-acc">${totalSentences}</div><div class="stat-lbl">Sentences</div></div>
+    <div class="stat-card"><div class="stat-val ${spellErrors.length>0?'c-err':'c-ok'}">${spellErrors.length}</div><div class="stat-lbl">Spell Errors</div></div>
+    <div class="stat-card"><div class="stat-val ${accuracy<90?'c-warn':'c-ok'}">${accuracy}%</div><div class="stat-lbl">Accuracy</div></div>
+  `;
+
+  // Token stream
+  let tokenHTML = '';
+  tokens.forEach(tok => {
+    if (tok.type === TOKEN_TYPES.SPACE || tok.type === TOKEN_TYPES.NEWLINE) {
+      tokenHTML += `<span class="token tok-space">·</span>`;
+    } else if (tok.type === TOKEN_TYPES.NUMBER) {
+      tokenHTML += `<span class="token tok-number">${escHtml(tok.val)}<span class="tok-badge">NUM</span></span>`;
+    } else if (tok.type === TOKEN_TYPES.PUNCT) {
+      tokenHTML += `<span class="token tok-punct">${escHtml(tok.val)}</span>`;
+    } else {
+      const low = tok.val.toLowerCase();
+      const isMisspelled = spellErrors.some(e => e.word.toLowerCase() === low);
+      if (isMisspelled) {
+        tokenHTML += `<span class="token tok-misspelled" title="Misspelled">${escHtml(tok.val)}<span class="tok-badge">ERR</span></span>`;
+      } else {
+        tokenHTML += `<span class="token tok-word">${escHtml(tok.val)}</span>`;
+      }
+    }
+  });
+  document.getElementById('token-display').innerHTML = tokenHTML || '<span style="color:#ccc;font-size:13px">No tokens</span>';
+
+  // Errors
+  let errHTML = '';
+  spellErrors.forEach(err => {
+    const sugs = (err.suggestions || []).slice(0,5);
+    errHTML += `
+      <div class="error-item spelling">
+        <div class="err-icon spelling">✗</div>
+        <div class="err-body">
+          <div class="err-top">
+            <span class="err-word">"${escHtml(err.word)}"</span>
+            <span class="err-type spelling">Spelling</span>
+          </div>
+          <div class="err-desc">Word not found in dictionary. ${err.typo?'Known typo pattern detected.':'Edit distance suggestions below.'}</div>
+          ${sugs.length ? `<div class="suggestions">${sugs.map(s=>`<button class="sug-btn" onclick="applySuggestion('${escHtml(err.word)}','${s}')">${s}</button>`).join('')}</div>` : '<span style="font-size:12px;color:#bbb">No close suggestions found</span>'}
+        </div>
+      </div>`;
+  });
+
+  grammarErrors.forEach(err => {
+    errHTML += `
+      <div class="error-item ${err.type}">
+        <div class="err-icon ${err.type}">${err.type==='grammar'?'!':'i'}</div>
+        <div class="err-body">
+          <div class="err-top">
+            <span class="err-word">"${escHtml(err.match)}"</span>
+            <span class="err-type ${err.type}">${err.type==='grammar'?'Grammar':'Info'}</span>
+          </div>
+          <div class="err-desc">${err.msg}</div>
+        </div>
+      </div>`;
+  });
+
+  if (!errHTML) errHTML = `<div style="text-align:center;padding:2rem;color:#bbb;font-size:14px">No errors detected — your text looks great!</div>`;
+  document.getElementById('error-list').innerHTML = errHTML;
+
+  // Corrected text
+  let corrected = text;
+  const replacements = {};
+  spellErrors.forEach(err => {
+    if (err.suggestions && err.suggestions.length > 0) {
+      replacements[err.word] = err.suggestions[0];
+    }
+  });
+  grammarErrors.forEach(err => { if (err.fix) corrected = err.fix(corrected); });
+
+  let correctedHTML = escHtml(corrected);
+  Object.entries(replacements).forEach(([wrong, right]) => {
+    const re = new RegExp('\\b' + escHtml(wrong) + '\\b', 'g');
+    correctedHTML = correctedHTML.replace(re, `<span class="highlight">${right}</span>`);
+  });
+  document.getElementById('corrected-display').innerHTML = correctedHTML;
+
+  // AST
+  document.getElementById('ast-display').innerHTML = renderAST(ast);
+
+  // Compiler log
+  document.getElementById('phase-log').innerHTML = logs.join('<br>');
+
+  document.getElementById('results-section').style.display = 'block';
+  document.getElementById('empty-placeholder').style.display = 'none';
+  switchTab('tokens');
+}
+
+function applySuggestion(wrong, right) {
+  const ta = document.getElementById('main-input');
+  const re = new RegExp('\\b' + wrong + '\\b', 'gi');
+  ta.value = ta.value.replace(re, right);
+  updateCount();
+  analyze();
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    const tabs = ['tokens','errors','corrected','ast','log'];
+    t.classList.toggle('active', tabs[i] === name);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+}
+
+function updateCount() {
+  const val = document.getElementById('main-input').value;
+  const words = val.trim() ? val.trim().split(/\s+/).length : 0;
+  document.getElementById('char-count').textContent = `${val.length} characters · ${words} words`;
+}
+
+document.getElementById('main-input').addEventListener('input', updateCount);
+
+function clearAll() {
+  document.getElementById('main-input').value = '';
+  document.getElementById('results-section').style.display = 'none';
+  document.getElementById('empty-placeholder').style.display = 'block';
+  updateCount();
+  document.querySelectorAll('.pipe-step').forEach(s => s.classList.remove('active'));
+}
+
+function loadSample() {
+  document.getElementById('main-input').value = "The quikc brwon fox jumpd ovr the lasy dog. i beleive this sentance has severel erorrs in it. She recieve a accomodate package. Grammer and speling mistakes are very very common in writting.";
+  updateCount();
+}
+
+function copyText() {
+  const t = document.getElementById('corrected-display').innerText;
+  navigator.clipboard.writeText(t).catch(()=>{});
+}
+
+function handleFile(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  if (file.size > 50000) { alert('File too large (max 50 KB)'); return; }
+  const reader = new FileReader();
+  reader.onload = ev => {
+    document.getElementById('main-input').value = ev.target.result;
+    updateCount();
+    analyze();
+  };
+  reader.readAsText(file);
+}
+
+const zone = document.getElementById('upload-zone');
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+zone.addEventListener('drop', e => {
+  e.preventDefault();
+  zone.classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      document.getElementById('main-input').value = ev.target.result;
+      updateCount();
+      analyze();
+    };
+    reader.readAsText(file);
+  }
+});
+</script>
